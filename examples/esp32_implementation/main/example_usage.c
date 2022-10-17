@@ -37,7 +37,7 @@ void app_main(void)
             //Reading here
             if(bmp280_i2c_read_data(&bmp280_dt) == BMP280_OK)
             {
-                ESP_LOGI(TAG, "Pressure: %d", bmp280_dt.pressure);
+                ESP_LOGI(TAG, "Pressure: %.01f", bmp280_dt.pressure);
                 ESP_LOGI(TAG, "Temperature: %.01f", bmp280_dt.temperature);
             }
             else{
