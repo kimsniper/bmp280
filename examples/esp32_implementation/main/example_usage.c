@@ -28,7 +28,7 @@ void app_main(void)
         ESP_LOGE(TAG, "Unable to read part number!");
     } 
 
-    if (err == ESP_OK)
+    if (err == ESP_OK && id == 0x58)
     {
         ESP_LOGI(TAG, "BMP280 initialization successful");
         uint16_t pressure;
