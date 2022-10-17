@@ -65,8 +65,14 @@ typedef struct{
 } bmp280_status_t;
 
 typedef struct{
+    uint8_t osrs_tmp : 3;
+    uint8_t osrs_press : 3;
+    uint8_t mode : 2;
+} bmp280_ctrl_meas_t;
+
+typedef struct{
     uint16_t pressure;
-    int8_t temperature;
+    float temperature;
 } bmp280_data_t;
 
 /**
@@ -98,9 +104,12 @@ typedef struct{
 #define OSRS_x4                         0x03
 #define OSRS_x8                         0x04
 #define OSRS_x16                        0x05
+#define POWERMODE_SLEEP                 0x00
+#define POWERMODE_FORCED                0x01
+#define POWERMODE_NORMAL                0x02
 
 /**
- * @brief BMP280 REG_CONFIG register T_SB setting 
+ * @brief BMP280 REG_CONFIG register setting 
  * @details R/W time delay values
  */
 #define T_SB_0_5                        0x00
@@ -111,24 +120,12 @@ typedef struct{
 #define T_SB_1000                       0x05
 #define T_SB_2000                       0x06
 #define T_SB_4000                       0x07
-
-/**
- * @brief BMP280 REG_CONFIG register FILTER setting 
- * @details R/W time delay values
- */
 #define FILTER_OFF                      0x01
 #define FILTER_2                        0x02
 #define FILTER_2                        0x05
 #define FILTER_2                        0x03
 #define FILTER_2                        0x04
-
-/**
- * @brief BMP280 REG_CONFIG register POWER MODE setting 
- * @details R/W time delay values
- */
-#define POWERMODE_SLEEP                 0x00
-#define POWERMODE_FORCED                0x01
-#define POWERMODE_NORMAL                0x02
+#define SPI_3W_ENABLE                   0x01
 
 /**
  * @brief BMP280 calibration setting.

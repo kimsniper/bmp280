@@ -50,6 +50,30 @@ bmp280_err_t bmp280_i2c_write_config(bmp280_config_t cfg)
     return err;
 }
 
+bmp280_err_t bmp280_i2c_read_config(uint8_t *cfg)
+{
+    uint8_t reg = REG_CONFIG;
+    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, cfg, 1);
+    return err;
+}
+
+bmp280_err_t bmp280_i2c_write_ctrl_meas(bmp280_config_t cfg)
+{
+    uint8_t reg = REG_CONFIG;
+    uint8_t data[2];
+    data[0] = reg;
+    data[1] = (cfg.t_sb << 7) | (cfg.filter << 4) | cfg.spi3w_en;
+    bmp280_err_t err = bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
+    return err;
+}
+
+bmp280_err_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg)
+{
+    uint8_t reg = REG_CONFIG;
+    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, cfg, 1);
+    return err;
+}
+
 bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb)
 {
     uint8_t reg = REG_CALIB;
@@ -67,13 +91,6 @@ bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb)
     clb->dig_p7 = (data[19] << 8) | data[18];
     clb->dig_p8 = (data[21] << 8) | data[20];
     clb->dig_p9 = (data[23] << 8) | data[21];
-    return err;
-}
-
-bmp280_err_t bmp280_i2c_read_config(uint8_t *cfg)
-{
-    uint8_t reg = REG_CONFIG;
-    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, cfg, 1);
     return err;
 }
 
@@ -99,6 +116,7 @@ bmp280_err_t bmp280_i2c_read_pressure_r(uint32_t *dt)
     uint8_t reg = REG_PRESS_READ;
     uint8_t data[3];
     bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, data, sizeof(data));
+    *dt = (data[0] << 12) | (data[1] << 4) | (data[2] >> 4);
     return err;
 }
 
@@ -107,6 +125,7 @@ bmp280_err_t bmp280_i2c_read_temperature_r(uint32_t *dt)
     uint8_t reg = REG_TEMP_READ;
     uint8_t data[3];
     bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, data, sizeof(data));
+    *dt = (data[0] << 12) | (data[1] << 4) | (data[2] >> 4);
     return err;
 } 
 
@@ -124,7 +143,7 @@ bmp280_err_t bmp280_i2c_read_data(bmp280_data_t *dt)
     var2_t = (((((temp_raw>>4) - ((uint32_t)calib_params.dig_t1)) * ((temp_raw>>4) - ((uint32_t)calib_params.dig_t1))) >> 12) * ((uint32_t)calib_params.dig_t3)) >> 14;
     t_fine = var1_t + var2_t;
     t = (t_fine * 5 + 128) >> 8;
-    dt->temperature = (int8_t) t;
+    dt->temperature = (double) t;
 
     var1_p = ((uint64_t)t_fine) - 128000;
     var2_p = var1_p * var1_p * (uint64_t)calib_params.dig_p6;

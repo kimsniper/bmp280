@@ -31,11 +31,19 @@ void app_main(void)
     if (err == ESP_OK && id == 0x58)
     {
         ESP_LOGI(TAG, "BMP280 initialization successful");
-        uint16_t pressure;
-        uint8_t temperature;
+        bmp280_data_t bmp280_dt;
         while(1)
         {
             //Reading here
+            if(bmp280_i2c_read_data(&bmp280_dt) == BMP280_OK)
+            {
+                ESP_LOGI(TAG, "Pressure: %d", bmp280_dt.pressure);
+                ESP_LOGI(TAG, "Temperature: %.01f", bmp280_dt.temperature);
+            }
+            else{
+                ESP_LOGE(TAG, "Error reading data!");
+            }
+            
             vTaskDelay(pdMS_TO_TICKS(2000));
         }
     }
