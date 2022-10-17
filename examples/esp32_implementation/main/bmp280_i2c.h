@@ -143,7 +143,7 @@ bmp280_err_t bmp280_i2c_write_config(bmp280_config_t cfg);
  * @brief BMP280 configuration setting.
  * @details Get configuration settings.
  */
-bmp280_err_t bmp280_i2c_read_config(uint8_t *cfg);
+bmp280_err_t bmp280_i2c_read_config(bmp280_config_t *cfg);
 
 /**
  * @brief BMP280 calibration setting.
