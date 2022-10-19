@@ -71,8 +71,8 @@ typedef struct{
 } bmp280_ctrl_meas_t;
 
 typedef struct{
-    float pressure;
-    float temperature;
+    uint32_t pressure;
+    uint32_t temperature;   
 } bmp280_data_t;
 
 /**
