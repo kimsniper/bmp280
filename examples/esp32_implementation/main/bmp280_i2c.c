@@ -151,7 +151,7 @@ bmp280_err_t bmp280_i2c_read_data(bmp280_data_t *dt)
     var2_t = (((((temp_raw>>4) - ((uint32_t)calib_params.dig_t1)) * ((temp_raw>>4) - ((uint32_t)calib_params.dig_t1))) >> 12) * ((uint32_t)calib_params.dig_t3)) >> 14;
     t_fine = var1_t + var2_t;
     t = (t_fine * 5 + 128) >> 8;
-    dt->temperature = (float) t;
+    dt->temperature = (float) t/100;
 
     var1_p = ((uint64_t)t_fine) - 128000;
     var2_p = var1_p * var1_p * (uint64_t)calib_params.dig_p6;
@@ -168,7 +168,7 @@ bmp280_err_t bmp280_i2c_read_data(bmp280_data_t *dt)
     var2_p = (((uint64_t)calib_params.dig_p8) * p) >> 19;
     p = ((p + var1_p + var2_p) >> 8) + (((uint64_t)calib_params.dig_p7)<<4);
 
-    dt->pressure = (float) p;
+    dt->pressure = (float) p/256;
 
     return err;
 } 
