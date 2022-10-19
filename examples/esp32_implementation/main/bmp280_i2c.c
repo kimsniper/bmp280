@@ -143,7 +143,8 @@ bmp280_err_t bmp280_i2c_read_data(bmp280_data_t *dt)
     bmp280_err_t err = bmp280_i2c_read_pressure_r(&press_raw);
     err += bmp280_i2c_read_temperature_r(&temp_raw);
 
-    if (err != BMP280_OK) return err;
+    if (err != BMP280_OK) 
+        return err;
 
     uint32_t var1_t, var2_t, t;
     uint64_t var1_p, var2_p, p;
@@ -160,7 +161,8 @@ bmp280_err_t bmp280_i2c_read_data(bmp280_data_t *dt)
     var1_p = ((var1_p * var1_p * (uint64_t)calib_params.dig_p3)>>8) + ((var1_p * (uint64_t)calib_params.dig_p2)<<12);
     var1_p = (((((uint64_t)1)<<47)+var1_p))*((uint64_t)calib_params.dig_p1)>>33;
 
-    if (var1_p == 0) return BMP280_ERR; // avoid exception caused by division by zero
+    if (var1_p == 0) 
+        return BMP280_ERR; // avoid exception caused by division by zero
 
     p = 1048576 - press_raw;
     p = (((p<<31)-var2_p)*3125)/var1_p;
