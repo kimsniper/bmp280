@@ -120,12 +120,13 @@ typedef struct{
 #define T_SB_1000                       0x05
 #define T_SB_2000                       0x06
 #define T_SB_4000                       0x07
-#define FILTER_OFF                      0x01
-#define FILTER_2                        0x02
-#define FILTER_2                        0x05
-#define FILTER_2                        0x03
-#define FILTER_2                        0x04
-#define SPI_3W_ENABLE                   0x01
+#define FILTER_OFF                      0x00
+#define FILTER_2                        0x01
+#define FILTER_4                        0x02
+#define FILTER_5                        0x03
+#define FILTER_16                       0x04
+#define SPI_3W                          0x01
+#define SPI_4W                          0x00
 
 /**
  * @brief BMP280 calibration setting.
