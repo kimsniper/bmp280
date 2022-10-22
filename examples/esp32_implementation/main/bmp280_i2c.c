@@ -32,6 +32,8 @@
 #include "bmp280_i2c.h" 
 #include "bmp280_i2c_hal.h" 
 
+#include "stdio.h"
+
 bmp280_calib_t calib_params;
 
 bmp280_err_t bmp280_i2c_set_calib()
@@ -71,14 +73,22 @@ bmp280_err_t bmp280_i2c_write_ctrl_meas(bmp280_ctrl_meas_t cfg)
     return err;
 }
 
-bmp280_err_t bmp280_i2c_read_ctrl_meas(bmp280_ctrl_meas_t *cfg)
+bmp280_err_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg)
 {
     uint8_t reg = REG_CTRL_MEAS;
     uint8_t data;
     bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, &data, 1);
-    cfg->osrs_tmp = (data & 0xE0) >> 5;
-    cfg->osrs_press = (data & 0x1C) >> 2;
-    cfg->mode = data & 0x03;
+    return err;
+}
+
+bmp280_err_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode)
+{
+    uint8_t reg = REG_CTRL_MEAS;
+    uint8_t cfg, data[2];
+    bmp280_err_t err = bmp280_i2c_read_ctrl_meas(&cfg);
+    data[0] = reg;
+    data[1] = (cfg & 0xFC) | pmode;
+    err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
     return err;
 }
 

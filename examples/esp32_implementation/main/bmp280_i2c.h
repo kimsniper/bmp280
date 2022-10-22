@@ -64,6 +64,12 @@ typedef struct{
     uint8_t im_update : 1;
 } bmp280_status_t;
 
+typedef enum{
+    POWERMODE_SLEEP,
+    POWERMODE_FORCED,
+    POWERMODE_NORMAL = 3,
+} bmp280_pwr_mode_t;
+
 typedef struct{
     uint8_t osrs_tmp : 3;
     uint8_t osrs_press : 3;
@@ -104,9 +110,6 @@ typedef struct{
 #define OSRS_x4                         0x03
 #define OSRS_x8                         0x04
 #define OSRS_x16                        0x05
-#define POWERMODE_SLEEP                 0x00
-#define POWERMODE_FORCED                0x01
-#define POWERMODE_NORMAL                0x02
 
 /**
  * @brief BMP280 REG_CONFIG register setting 
@@ -163,6 +166,8 @@ bmp280_err_t bmp280_i2c_read_status(bmp280_status_t *sts);
  * @details Reset sensor.
  */
 bmp280_err_t bmp280_i2c_reset();
+
+bmp280_err_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode);
 
 /**
  * @brief BMP280 reading.

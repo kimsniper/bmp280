@@ -18,7 +18,7 @@ void app_main(void)
     bmp280_i2c_hal_init();
 
     err = bmp280_i2c_reset();
-    if(err != ESP_OK) ESP_LOGE(TAG, "Error setting the device!");
+    if(err != BMP280_OK) ESP_LOGE(TAG, "Error setting the device!");
 
     err += bmp280_i2c_read_part_number(&id);
     if(err == ESP_OK){
@@ -26,9 +26,15 @@ void app_main(void)
     } 
     else{
         ESP_LOGE(TAG, "Unable to read part number!");
-    } 
+    }
 
-    if (err == ESP_OK && id == 0x58)
+    err += bmp280_i2c_set_calib();
+    ESP_LOGI(TAG, "Calibration data setting: %s", err == BMP280_OK ? "Successful" : "Failed");
+
+    err += bmp280_i2c_write_power_mode(POWERMODE_NORMAL);
+    ESP_LOGI(TAG, "Setting to normal mode: %s", err == BMP280_OK ? "Successful" : "Failed");
+
+    if (err == BMP280_OK && id == 0x58)
     {
         ESP_LOGI(TAG, "BMP280 initialization successful");
         bmp280_data_t bmp280_dt;
@@ -37,8 +43,8 @@ void app_main(void)
             //Reading here
             if(bmp280_i2c_read_data(&bmp280_dt) == BMP280_OK)
             {
-                ESP_LOGI(TAG, "Pressure: %.01f", (float)bmp280_dt.pressure/256);
-                ESP_LOGI(TAG, "Temperature: %.01f", (float)bmp280_dt.temperature/100);
+                ESP_LOGI(TAG, "Pressure: %.01f Pa", (float)bmp280_dt.pressure/256);
+                ESP_LOGI(TAG, "Temperature: %.01f °C", (float)bmp280_dt.temperature/100);
             }
             else{
                 ESP_LOGE(TAG, "Error reading data!");
