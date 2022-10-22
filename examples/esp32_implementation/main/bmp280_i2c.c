@@ -32,8 +32,6 @@
 #include "bmp280_i2c.h" 
 #include "bmp280_i2c_hal.h" 
 
-#include "stdio.h"
-
 bmp280_calib_t calib_params;
 
 bmp280_err_t bmp280_i2c_set_calib()
