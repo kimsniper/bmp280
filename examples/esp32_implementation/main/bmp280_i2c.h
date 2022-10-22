@@ -53,9 +53,28 @@ typedef struct{
     int16_t dig_p9;
 } bmp280_calib_t;
 
+typedef enum{
+    T_SB_0_5,
+    T_SB_62_5,
+    T_SB_125,
+    T_SB_250,
+    T_SB_5000,
+    T_SB_1000,
+    T_SB_2000,
+    T_SB_4000,
+} bmp280_sb_time_t;
+
+typedef enum{
+    FILTER_OFF,
+    FILTER_2,
+    FILTER_4,
+    FILTER_8,
+    FILTER_16,
+} bmp280_filter_t;
+
 typedef struct{
-    uint8_t t_sb : 3;
-    uint8_t filter : 3;
+    bmp280_sb_time_t t_sb : 3;
+    bmp280_filter_t filter : 3;
     uint8_t spi3w_en : 1
 } bmp280_config_t;
 
@@ -67,18 +86,27 @@ typedef struct{
 typedef enum{
     POWERMODE_SLEEP,
     POWERMODE_FORCED,
-    POWERMODE_NORMAL = 3,
+    POWERMODE_NORMAL = 0x03,
 } bmp280_pwr_mode_t;
 
+typedef enum{
+    OSRS_x0,
+    OSRS_x1,
+    OSRS_x2,
+    OSRS_x4,
+    OSRS_x8,
+    OSRS_x16,
+} bmp280_osrs_t;
+
 typedef struct{
-    uint8_t osrs_tmp : 3;
-    uint8_t osrs_press : 3;
-    uint8_t mode : 2;
+    bmp280_osrs_t osrs_tmp : 3;
+    bmp280_osrs_t osrs_press : 3;
+    bmp280_pwr_mode_t pmode : 2;
 } bmp280_ctrl_meas_t;
 
 typedef struct{
     uint32_t pressure;
-    uint32_t temperature;   
+    int32_t temperature;   
 } bmp280_data_t;
 
 /**
@@ -101,35 +129,10 @@ typedef struct{
 #define REG_TEMP_READ                   0xFA
 
 /**
- * @brief BMP280 REG_CTRL_MEAS register setting.
- * @details R/W Command values
+ * @brief BMP280 calibration setting.
+ * @details Get configuration settings.
  */
-#define OSRS_x0                         0x00
-#define OSRS_x1                         0x01
-#define OSRS_x2                         0x02
-#define OSRS_x4                         0x03
-#define OSRS_x8                         0x04
-#define OSRS_x16                        0x05
-
-/**
- * @brief BMP280 REG_CONFIG register setting 
- * @details R/W time delay values
- */
-#define T_SB_0_5                        0x00
-#define T_SB_62_5                       0x01
-#define T_SB_125                        0x02
-#define T_SB_250                        0x03
-#define T_SB_500                        0x04
-#define T_SB_1000                       0x05
-#define T_SB_2000                       0x06
-#define T_SB_4000                       0x07
-#define FILTER_OFF                      0x00
-#define FILTER_2                        0x01
-#define FILTER_4                        0x02
-#define FILTER_5                        0x03
-#define FILTER_16                       0x04
-#define SPI_3W                          0x01
-#define SPI_4W                          0x00
+bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb);
 
 /**
  * @brief BMP280 calibration setting.
@@ -145,15 +148,15 @@ bmp280_err_t bmp280_i2c_write_config(bmp280_config_t cfg);
 
 /**
  * @brief BMP280 configuration setting.
- * @details Get configuration settings.
+ * @details Read configuration settings.
  */
 bmp280_err_t bmp280_i2c_read_config(bmp280_config_t *cfg);
 
-/**
- * @brief BMP280 calibration setting.
- * @details Get configuration settings.
- */
-bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb);
+bmp280_err_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg);
+
+bmp280_err_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode);
+
+bmp280_err_t bmp280_i2c_write_osrs(bmp280_ctrl_meas_t cfg);
 
 /**
  * @brief BMP280 status.
@@ -167,24 +170,18 @@ bmp280_err_t bmp280_i2c_read_status(bmp280_status_t *sts);
  */
 bmp280_err_t bmp280_i2c_reset();
 
-bmp280_err_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode);
+/**
+ * @brief BMP280 sensor reading.
+ * @details Read pressure sensor raw data.
+ */
+bmp280_err_t bmp280_i2c_read_pressure_r(int32_t *dt);
 
 /**
- * @brief BMP280 reading.
- * @details Read pressure sensor.
+ * @brief BMP280 sensor reading.
+ * @details Read temperature sensor raw data.
  */
-bmp280_err_t bmp280_i2c_read_pressure_r(uint32_t *dt);
+bmp280_err_t bmp280_i2c_read_temperature_r(int32_t *dt);
 
-/**
- * @brief BMP280 reading.
- * @details Read temperature sensor.
- */
-bmp280_err_t bmp280_i2c_read_temperature_r(uint32_t *dt);
-
-/**
- * @brief BMP280 reading.
- * @details Read temperature sensor.
- */
 bmp280_err_t bmp280_i2c_read_data(bmp280_data_t *dt);
 
 /**
