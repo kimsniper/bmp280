@@ -129,6 +129,12 @@ typedef struct{
 #define REG_TEMP_READ                   0xFA
 
 /**
+ * @brief BMP280 macros.
+ * @details Other Macros
+ */
+#define RESET_VAL                       0xB6
+
+/**
  * @brief BMP280 calibration setting.
  * @details Get configuration settings.
  */
@@ -150,7 +156,9 @@ bmp280_err_t bmp280_i2c_write_config(bmp280_config_t cfg);
  * @brief BMP280 configuration setting.
  * @details Read configuration settings.
  */
-bmp280_err_t bmp280_i2c_read_config(bmp280_config_t *cfg);
+bmp280_err_t bmp280_i2c_read_config(uint8_t *cfg);
+
+bmp280_err_t bmp280_i2c_write_config_filter(bmp280_filter_t fltr);
 
 bmp280_err_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg);
 
