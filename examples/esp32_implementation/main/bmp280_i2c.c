@@ -32,8 +32,6 @@
 #include "bmp280_i2c.h" 
 #include "bmp280_i2c_hal.h" 
 
-#include "stdio.h"
-
 bmp280_calib_t calib_params;
 
 bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb)
@@ -103,10 +101,8 @@ bmp280_err_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode)
     uint8_t reg = REG_CTRL_MEAS;
     uint8_t cfg, data[2];
     bmp280_err_t err = bmp280_i2c_read_ctrl_meas(&cfg);
-    printf("cfg : %d", cfg);
     data[0] = reg;
     data[1] = (cfg & 0xFC) | pmode;
-    printf("data[1] : %d", data[1]);
     err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
     bmp280_i2c_hal_ms_delay(100);
     return err;
@@ -117,10 +113,8 @@ bmp280_err_t bmp280_i2c_write_osrs(bmp280_ctrl_meas_t ctrl_meas)
     uint8_t reg = REG_CTRL_MEAS;
     uint8_t cfg, data[2];
     bmp280_err_t err = bmp280_i2c_read_ctrl_meas(&cfg);
-    printf("cfg : %d", cfg);
     data[0] = reg;
     data[1] = (cfg & 0x03) | (ctrl_meas.osrs_press << 2) | (ctrl_meas.osrs_tmp << 5);
-    printf("data[1] : %d", data[1]);
     err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
     bmp280_i2c_hal_ms_delay(100);
     return err;
