@@ -72,10 +72,15 @@ typedef enum{
     FILTER_16,
 } bmp280_filter_t;
 
+typedef enum{
+    SPI_4W,
+    SPI_3W,
+} bmp280_spi_w_t;
+
 typedef struct{
     bmp280_sb_time_t t_sb : 3;
     bmp280_filter_t filter : 3;
-    uint8_t spi3w_en : 1
+    bmp280_spi_w_t spi3w_en : 1
 } bmp280_config_t;
 
 typedef struct{
@@ -159,6 +164,10 @@ bmp280_err_t bmp280_i2c_write_config(bmp280_config_t cfg);
 bmp280_err_t bmp280_i2c_read_config(uint8_t *cfg);
 
 bmp280_err_t bmp280_i2c_write_config_filter(bmp280_filter_t fltr);
+
+bmp280_err_t bmp280_i2c_write_config_spi_w(bmp280_spi_w_t spi_w);
+
+bmp280_err_t bmp280_i2c_write_config_standby_time(bmp280_sb_time_t t_sb);
 
 bmp280_err_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg);
 

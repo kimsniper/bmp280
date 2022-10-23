@@ -34,8 +34,8 @@ void app_main(void)
     err += bmp280_i2c_write_power_mode(POWERMODE_NORMAL);
     ESP_LOGI(TAG, "Setting to normal mode: %s", err == BMP280_OK ? "Successful" : "Failed");
 
-    //Config setting. We'll use suggested setting for elevation detection
-    //bmp280_i2c_write_config_filter(FILTER_4);
+    //Config setting. We'll use suggested settings for elevation detection
+    err += bmp280_i2c_write_config_filter(FILTER_4);
     bmp280_ctrl_meas_t ctrl_meas = {
         .osrs_press = OSRS_x4,
         .osrs_tmp = OSRS_x1,
@@ -43,8 +43,8 @@ void app_main(void)
     err += bmp280_i2c_write_osrs(ctrl_meas);
 
     uint8_t cfg;
-    bmp280_i2c_read_ctrl_meas(&cfg);
-    ESP_LOGW(TAG, "read_osrs: %d", cfg);
+    bmp280_i2c_read_config(&cfg);
+    ESP_LOGW(TAG, "read_config: %d", cfg);
 
     if (err == BMP280_OK && id == 0x58)
     {

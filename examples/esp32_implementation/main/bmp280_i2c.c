@@ -32,6 +32,8 @@
 #include "bmp280_i2c.h" 
 #include "bmp280_i2c_hal.h" 
 
+#include "stdio.h"
+
 bmp280_calib_t calib_params;
 
 bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb)
@@ -50,7 +52,7 @@ bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb)
     clb->dig_p6 = (data[17] << 8) | data[16];
     clb->dig_p7 = (data[19] << 8) | data[18];
     clb->dig_p8 = (data[21] << 8) | data[20];
-    clb->dig_p9 = (data[23] << 8) | data[21];
+    clb->dig_p9 = (data[23] << 8) | data[22];
     return err;
 }
 
@@ -73,8 +75,7 @@ bmp280_err_t bmp280_i2c_write_config(bmp280_config_t cfg)
 bmp280_err_t bmp280_i2c_read_config(uint8_t *cfg)
 {
     uint8_t reg = REG_CONFIG;
-    uint8_t data;
-    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, &data, 1);
+    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, cfg, 1);
     return err;
 }
 
@@ -83,8 +84,34 @@ bmp280_err_t bmp280_i2c_write_config_filter(bmp280_filter_t fltr)
     uint8_t reg = REG_CONFIG;
     uint8_t data[2], cfg;
     bmp280_err_t err = bmp280_i2c_read_config(&cfg);
+    printf("cfg : %d", cfg);
     data[0] = reg;
-    data[1] = (cfg & 0xE3) | fltr;
+    data[1] = (cfg & 0xE3) | fltr << 2;
+    printf("data[1] : %d", data[1]);
+    err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
+    return err;
+}
+
+bmp280_err_t bmp280_i2c_write_config_spi_w(bmp280_spi_w_t spi_w)
+{
+    uint8_t reg = REG_CONFIG;
+    uint8_t data[2], cfg;
+    bmp280_err_t err = bmp280_i2c_read_config(&cfg);
+    printf("cfg : %d", cfg);
+    data[0] = reg;
+    data[1] = (cfg & 0xFE) | spi_w;
+    printf("data[1] : %d", data[1]);
+    err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
+    return err;
+}
+
+bmp280_err_t bmp280_i2c_write_config_standby_time(bmp280_sb_time_t t_sb)
+{
+    uint8_t reg = REG_CONFIG;
+    uint8_t data[2], cfg;
+    bmp280_err_t err = bmp280_i2c_read_config(&cfg);
+    data[0] = reg;
+    data[1] = (cfg & 0x1F) | t_sb << 5;
     err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
     return err;
 }
@@ -104,7 +131,6 @@ bmp280_err_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode)
     data[0] = reg;
     data[1] = (cfg & 0xFC) | pmode;
     err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
-    bmp280_i2c_hal_ms_delay(100);
     return err;
 }
 
