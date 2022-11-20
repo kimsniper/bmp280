@@ -36,25 +36,25 @@ See the [Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/l
 ## Example Output
 
 ```bash
-I (332) example_usage: Calibration data setting: Successful
-I (332) example_usage: Setting to normal mode: Successful
-I (342) example_usage: BMP280 initialization successful
-I (342) example_usage: Pressure: 101070.8 Pa
-I (352) example_usage: Temperature: 32.5 °C
-I (2352) example_usage: Pressure: 101068.8 Pa
-I (2352) example_usage: Temperature: 32.5 °C
-I (4352) example_usage: Pressure: 101071.7 Pa
-I (4352) example_usage: Temperature: 32.5 °C
-I (6352) example_usage: Pressure: 101069.6 Pa
-I (6352) example_usage: Temperature: 32.4 °C
-I (8352) example_usage: Pressure: 101071.6 Pa
-I (8352) example_usage: Temperature: 32.4 °C
-I (10352) example_usage: Pressure: 101071.4 Pa
-I (10352) example_usage: Temperature: 32.4 °C
-I (12352) example_usage: Pressure: 101070.1 Pa
-I (12352) example_usage: Temperature: 32.4 °C
-I (14352) example_usage: Pressure: 101071.0 Pa
-I (14352) example_usage: Temperature: 32.4 °C
-I (16352) example_usage: Pressure: 101068.6 Pa
-I (16352) example_usage: Temperature: 32.4 °C
+I (323) example_usage: Part number: 0x58
+I (333) example_usage: Calibration data setting: Successful
+I (333) example_usage: Setting to normal mode: Successful
+I (443) example_usage: BMP280 initialization successful
+I (443) example_usage: Pressure: 100607.3 Pa
+I (443) example_usage: Temperature: 29.9 °C
+I (2443) example_usage: Pressure: 100609.2 Pa
+I (2443) example_usage: Temperature: 30.1 °C
+I (4443) example_usage: Pressure: 100612.7 Pa
+I (4443) example_usage: Temperature: 30.1 °C
+I (6443) example_usage: Pressure: 100610.1 Pa
+I (6443) example_usage: Temperature: 30.1 °C
+I (8443) example_usage: Pressure: 100610.0 Pa
+I (8443) example_usage: Temperature: 30.1 °C
+I (10443) example_usage: Pressure: 100609.3 Pa
+I (10443) example_usage: Temperature: 30.1 °C
+I (12443) example_usage: Pressure: 100610.1 Pa
+I (12443) example_usage: Temperature: 30.1 °C
+I (14443) example_usage: Pressure: 100612.2 Pa
+I (14443) example_usage: Temperature: 30.1 °C
+I (16443) example_usage: Pressure: 100611.5 Pa
 ```

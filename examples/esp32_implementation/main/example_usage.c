@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "esp_log.h"
 #include "esp_err.h"
 #include "freertos/FreeRTOS.h"
@@ -42,9 +41,9 @@ void app_main(void)
     };
     err += bmp280_i2c_write_osrs(ctrl_meas);
 
-    uint8_t cfg;
-    bmp280_i2c_read_config(&cfg);
-    ESP_LOGW(TAG, "read_config: %d", cfg);
+    //uint8_t cfg;
+    //bmp280_i2c_read_config(&cfg);
+    //ESP_LOGW(TAG, "read_config: %d", cfg);
 
     if (err == BMP280_OK && id == 0x58)
     {
