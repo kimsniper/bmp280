@@ -109,14 +109,12 @@ typedef struct{
 } bmp280_data_t;
 
 /**
- * @brief BMP280 device address.
- * @details BMP280 I2C slave address.
+ * @brief BMP280 I2C slave address
  */
 #define I2C_ADDRESS_BMP280              0x76
 
 /**
- * @brief BMP280 command code registers.
- * @details R/W Command registers
+ * @brief BMP280 command code registers
  */
 #define REG_CALIB                       0x88
 #define REG_ID_PARTNUMBER               0xD0
@@ -128,8 +126,7 @@ typedef struct{
 #define REG_TEMP_READ                   0xFA
 
 /**
- * @brief BMP280 macros.
- * @details Other Macros
+ * @brief BMP280 macros
  */
 #define RESET_VAL                       0xB6
 
