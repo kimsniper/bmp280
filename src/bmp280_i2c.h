@@ -54,22 +54,22 @@ typedef struct{
 } bmp280_calib_t;
 
 typedef enum{
-    T_SB_0_5,
-    T_SB_62_5,
-    T_SB_125,
-    T_SB_250,
-    T_SB_5000,
-    T_SB_1000,
-    T_SB_2000,
-    T_SB_4000,
+    T_SB_0_5 = 0x00,
+    T_SB_62_5 = 0x01,
+    T_SB_125 = 0x02,
+    T_SB_250 = 0x03,
+    T_SB_5000 = 0x04,
+    T_SB_1000 = 0x05,
+    T_SB_2000 = 0x06,
+    T_SB_4000 = 0x07,
 } bmp280_sb_time_t;
 
 typedef enum{
-    FILTER_OFF,
-    FILTER_2,
-    FILTER_4,
-    FILTER_8,
-    FILTER_16,
+    FILTER_OFF = 0x00,
+    FILTER_2 = 0x01,
+    FILTER_4 = 0x02,
+    FILTER_8 = 0x03,
+    FILTER_16 = 0x04,
 } bmp280_filter_t;
 
 typedef struct{
@@ -83,18 +83,18 @@ typedef struct{
 } bmp280_status_t;
 
 typedef enum{
-    POWERMODE_SLEEP,
-    POWERMODE_FORCED,
+    POWERMODE_SLEEP = 0x00,
+    POWERMODE_FORCED = 0x01,
     POWERMODE_NORMAL = 0x03,
 } bmp280_pwr_mode_t;
 
 typedef enum{
-    OSRS_x0,
-    OSRS_x1,
-    OSRS_x2,
-    OSRS_x4,
-    OSRS_x8,
-    OSRS_x16,
+    OSRS_x0 = 0x00,
+    OSRS_x1 = 0x01,
+    OSRS_x2 = 0x02,
+    OSRS_x4 = 0x03,
+    OSRS_x8 = 0x04,
+    OSRS_x16 = 0x05,
 } bmp280_osrs_t;
 
 typedef struct{
