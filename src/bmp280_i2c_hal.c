@@ -31,13 +31,13 @@
 
 #include "bmp280_i2c_hal.h" 
 
-/* Hardware Specific Components */
+//Hardware Specific Components
 
-/* I2C User Defines */
+//I2C User Defines
 
-bmp280_err_t bmp280_i2c_hal_init()
+int16_t bmp280_i2c_hal_init()
 {
-    int err = BMP280_OK;
+    int16_t err = BMP280_OK;
 
     //User implementation here
 
@@ -45,9 +45,9 @@ bmp280_err_t bmp280_i2c_hal_init()
     return err == BMP280_OK ? BMP280_OK :  BMP280_ERR;
 }
 
-bmp280_err_t bmp280_i2c_hal_read(uint8_t address, uint8_t *reg, uint8_t *data, uint16_t count)
+int16_t bmp280_i2c_hal_read(uint8_t address, uint8_t *reg, uint8_t *data, uint16_t count)
 {
-    int err = BMP280_OK;
+    int16_t err = BMP280_OK;
 
     //User implementation here
 
@@ -55,9 +55,9 @@ bmp280_err_t bmp280_i2c_hal_read(uint8_t address, uint8_t *reg, uint8_t *data, u
     return err == BMP280_OK ? BMP280_OK :  BMP280_ERR;
 }
 
-bmp280_err_t bmp280_i2c_hal_write(uint8_t address, uint8_t *data, uint16_t count)
+int16_t bmp280_i2c_hal_write(uint8_t address, uint8_t *data, uint16_t count)
 {
-    int err = BMP280_OK;
+    int16_t err = BMP280_OK;
 
     //User implementation here
 

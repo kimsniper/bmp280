@@ -34,11 +34,11 @@
 
 bmp280_calib_t calib_params;
 
-bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb)
+int16_t bmp280_i2c_read_calib(bmp280_calib_t *clb)
 {
     uint8_t reg = REG_CALIB;
     uint8_t data[24];
-    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, data, sizeof(data));
+    int16_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, data, sizeof(data));
     clb->dig_t1 = (data[1] << 8)  | data[0];
     clb->dig_t2 = (data[3] << 8)  | data[2];
     clb->dig_t3 = (data[5] << 8)  | data[4];
@@ -54,64 +54,64 @@ bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb)
     return err;
 }
 
-bmp280_err_t bmp280_i2c_set_calib()
+int16_t bmp280_i2c_set_calib()
 {
-    bmp280_err_t err = bmp280_i2c_read_calib(&calib_params);
+    int16_t err = bmp280_i2c_read_calib(&calib_params);
     return err;
 }
 
-bmp280_err_t bmp280_i2c_read_config(uint8_t *cfg)
+int16_t bmp280_i2c_read_config(uint8_t *cfg)
 {
     uint8_t reg = REG_CONFIG;
-    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, cfg, 1);
+    int16_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, cfg, 1);
     return err;
 }
 
-bmp280_err_t bmp280_i2c_write_config_filter(bmp280_filter_t fltr)
+int16_t bmp280_i2c_write_config_filter(bmp280_filter_t fltr)
 {
     uint8_t reg = REG_CONFIG;
     uint8_t data[2], cfg;
-    bmp280_err_t err = bmp280_i2c_read_config(&cfg);
+    int16_t err = bmp280_i2c_read_config(&cfg);
     data[0] = reg;
     data[1] = (cfg & 0xE3) | (fltr << 2);
     err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
     return err;
 }
 
-bmp280_err_t bmp280_i2c_write_config_standby_time(bmp280_sb_time_t t_sb)
+int16_t bmp280_i2c_write_config_standby_time(bmp280_sb_time_t t_sb)
 {
     uint8_t reg = REG_CONFIG;
     uint8_t data[2], cfg;
-    bmp280_err_t err = bmp280_i2c_read_config(&cfg);
+    int16_t err = bmp280_i2c_read_config(&cfg);
     data[0] = reg;
     data[1] = (cfg & 0x1F) | (t_sb << 5);
     err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
     return err;
 }
 
-bmp280_err_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg)
+int16_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg)
 {
     uint8_t reg = REG_CTRL_MEAS;
-    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, cfg, 1);
+    int16_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, cfg, 1);
     return err;
 }
 
-bmp280_err_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode)
+int16_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode)
 {
     uint8_t reg = REG_CTRL_MEAS;
     uint8_t cfg, data[2];
-    bmp280_err_t err = bmp280_i2c_read_ctrl_meas(&cfg);
+    int16_t err = bmp280_i2c_read_ctrl_meas(&cfg);
     data[0] = reg;
     data[1] = (cfg & 0xFC) | pmode;
     err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
     return err;
 }
 
-bmp280_err_t bmp280_i2c_write_osrs(bmp280_ctrl_meas_t ctrl_meas)
+int16_t bmp280_i2c_write_osrs(bmp280_ctrl_meas_t ctrl_meas)
 {
     uint8_t reg = REG_CTRL_MEAS;
     uint8_t cfg, data[2];
-    bmp280_err_t err = bmp280_i2c_read_ctrl_meas(&cfg);
+    int16_t err = bmp280_i2c_read_ctrl_meas(&cfg);
     data[0] = reg;
     data[1] = (cfg & 0x03) | (ctrl_meas.osrs_press << 2) | (ctrl_meas.osrs_tmp << 5);
     err += bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
@@ -119,48 +119,48 @@ bmp280_err_t bmp280_i2c_write_osrs(bmp280_ctrl_meas_t ctrl_meas)
     return err;
 }
 
-bmp280_err_t bmp280_i2c_read_status(bmp280_status_t *sts)
+int16_t bmp280_i2c_read_status(bmp280_status_t *sts)
 {
     uint8_t reg = REG_STATUS;
     uint8_t data;
-    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, &data, 1);
+    int16_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, &data, 1);
     sts->measuring = data & (1 << 3);
     sts->im_update = data & (1 << 0);
     return err;
 }
 
-bmp280_err_t bmp280_i2c_reset()
+int16_t bmp280_i2c_reset()
 {
     uint8_t reg = REG_RESET;
     uint8_t data[2];
     data[0] = reg;
     data[1] = RESET_VAL;
-    bmp280_err_t err = bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
+    int16_t err = bmp280_i2c_hal_write(I2C_ADDRESS_BMP280, data, sizeof(data));
     return err;
 }
 
-bmp280_err_t bmp280_i2c_read_pressure_r(int32_t *dt)
+int16_t bmp280_i2c_read_pressure_r(int32_t *dt)
 {
     uint8_t reg = REG_PRESS_READ;
     uint8_t data[3];
-    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, data, sizeof(data));
+    int16_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, data, sizeof(data));
     *dt = (data[0] << 12) | (data[1] << 4) | (data[2] >> 4);
     return err;
 }
 
-bmp280_err_t bmp280_i2c_read_temperature_r(int32_t *dt)
+int16_t bmp280_i2c_read_temperature_r(int32_t *dt)
 {
     uint8_t reg = REG_TEMP_READ;
     uint8_t data[3];
-    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, data, sizeof(data));
+    int16_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, data, sizeof(data));
     *dt = (data[0] << 12) | (data[1] << 4) | (data[2] >> 4);
     return err;
 } 
 
-bmp280_err_t bmp280_i2c_read_data(bmp280_data_t *dt)
+int16_t bmp280_i2c_read_data(bmp280_data_t *dt)
 {
     int32_t t_fine, press_raw, temp_raw;
-    bmp280_err_t err = bmp280_i2c_read_pressure_r(&press_raw);
+    int16_t err = bmp280_i2c_read_pressure_r(&press_raw);
     err += bmp280_i2c_read_temperature_r(&temp_raw);
 
     if (err != BMP280_OK) 
@@ -194,9 +194,9 @@ bmp280_err_t bmp280_i2c_read_data(bmp280_data_t *dt)
     return err;
 } 
 
-bmp280_err_t bmp280_i2c_read_part_number(uint8_t *dt)
+int16_t bmp280_i2c_read_part_number(uint8_t *dt)
 {
     uint8_t reg = REG_ID_PARTNUMBER;
-    bmp280_err_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, dt, 1);
+    int16_t err = bmp280_i2c_hal_read(I2C_ADDRESS_BMP280, &reg, dt, 1);
     return err;
 } 

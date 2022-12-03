@@ -133,72 +133,72 @@ typedef struct{
 /**
  * @brief Read BMP280 calibration data
  */
-bmp280_err_t bmp280_i2c_read_calib(bmp280_calib_t *clb);
+int16_t bmp280_i2c_read_calib(bmp280_calib_t *clb);
 
 /**
  * @brief Setting BMP280 calibration data
  */
-bmp280_err_t bmp280_i2c_set_calib();
+int16_t bmp280_i2c_set_calib();
 
 /**
  * @brief Read BMP280 configuration setting
  */
-bmp280_err_t bmp280_i2c_read_config(uint8_t *cfg);
+int16_t bmp280_i2c_read_config(uint8_t *cfg);
 
 /**
  * @brief Set BMP280 filter setting
  */
-bmp280_err_t bmp280_i2c_write_config_filter(bmp280_filter_t fltr);
+int16_t bmp280_i2c_write_config_filter(bmp280_filter_t fltr);
 
 /**
  * @brief Set BMP280 standby time setting
  */
-bmp280_err_t bmp280_i2c_write_config_standby_time(bmp280_sb_time_t t_sb);
+int16_t bmp280_i2c_write_config_standby_time(bmp280_sb_time_t t_sb);
 
 /**
  * @brief Read BMP280 ctrl_meas register
  */
-bmp280_err_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg);
+int16_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg);
 
 /**
  * @brief Set BMP280 power mode setting
  */
-bmp280_err_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode);
+int16_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode);
 
 /**
  * @brief Set BMP280 oversampling setting for temp/presusure
  */
-bmp280_err_t bmp280_i2c_write_osrs(bmp280_ctrl_meas_t cfg);
+int16_t bmp280_i2c_write_osrs(bmp280_ctrl_meas_t cfg);
 
 /**
  * @brief Read BMP280 status (measuring/updating)
  */
-bmp280_err_t bmp280_i2c_read_status(bmp280_status_t *sts);
+int16_t bmp280_i2c_read_status(bmp280_status_t *sts);
 
 /**
  * @brief Perform BMP280 device reset
  */
-bmp280_err_t bmp280_i2c_reset();
+int16_t bmp280_i2c_reset();
 
 /**
  * @brief Read BMP280 raw pressure data
  */
-bmp280_err_t bmp280_i2c_read_pressure_r(int32_t *dt);
+int16_t bmp280_i2c_read_pressure_r(int32_t *dt);
 
 /**
  * @brief Read BMP280 raw temperature data
  */
-bmp280_err_t bmp280_i2c_read_temperature_r(int32_t *dt);
+int16_t bmp280_i2c_read_temperature_r(int32_t *dt);
 
 /**
  * @brief Read BMP280 pressure and temperature data
  */
-bmp280_err_t bmp280_i2c_read_data(bmp280_data_t *dt);
+int16_t bmp280_i2c_read_data(bmp280_data_t *dt);
 
 /**
  * @brief Read BMP280 part number
  */
-bmp280_err_t bmp280_i2c_read_part_number(uint8_t *dt);
+int16_t bmp280_i2c_read_part_number(uint8_t *dt);
 
 #ifdef __cplusplus
 }
