@@ -81,7 +81,7 @@ int16_t bmp280_i2c_hal_read(uint8_t address, uint8_t *reg, uint8_t *data, uint16
 	i2c_master_write_byte(cmd, address << 1 | I2C_MASTER_READ, 1);
 	i2c_master_read(cmd, data, count, I2C_MASTER_LAST_NACK);
 	i2c_master_stop(cmd);
-	err = i2c_master_cmd_begin(I2C_NUM_0, cmd, I2C_MASTER_TIMEOUT_MS / portTICK_RATE_MS);
+	err = i2c_master_cmd_begin(I2C_NUM_0, cmd, I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 
     return err == BMP280_OK ? BMP280_OK :  BMP280_ERR;
