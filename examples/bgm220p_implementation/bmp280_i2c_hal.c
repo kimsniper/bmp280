@@ -132,7 +132,7 @@ int16_t bmp280_i2c_hal_write(uint8_t address, uint8_t *data, uint16_t count)
 
     // Initialize I2C transfer
     i2cTransfer.addr          = address << 1;
-    i2cTransfer.flags         = I2C_FLAG_WRITE;
+    i2cTransfer.flags         = I2C_FLAG_WRITE_WRITE;
     i2cTransfer.buf[0].data   = &data[0];
     i2cTransfer.buf[0].len    = 1;
     i2cTransfer.buf[1].data   = (count == 1) ? NULL : &data[1];
