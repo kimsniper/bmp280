@@ -10,7 +10,7 @@ This example demonstrates usage of BMP280 for reading barometeric pressure.
 
 ### Hardware Required
 
-To run this example, you should have one ESP32, ESP32-S or ESP32-C based development board as well as a BMP280. The BMP280 is an absolute barometric pressure sensor especially designed for mobile applications. The sensor module is housed in an extremely compact 8-pin metal-lid LGA package with a footprint of only 2.0 × 2.5 mm2 and 0.95 mm package height. Its small dimensions and its low power consumption of 2.7 µA @1Hz allow the implementation in battery driven devices such as mobile phones, GPS modules or watches.. It is easy to operate via a simple I2C command, you can read the datasheet [here](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp280-ds001.pdf).
+To run this example, you should have BGM220P as well as a BMP280. The BMP280 is an absolute barometric pressure sensor especially designed for mobile applications. The sensor module is housed in an extremely compact 8-pin metal-lid LGA package with a footprint of only 2.0 × 2.5 mm2 and 0.95 mm package height. Its small dimensions and its low power consumption of 2.7 µA @1Hz allow the implementation in battery driven devices such as mobile phones, GPS modules or watches.. It is easy to operate via a simple I2C command, you can read the datasheet [here](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp280-ds001.pdf).
 
 #### Pin Assignment:
 
