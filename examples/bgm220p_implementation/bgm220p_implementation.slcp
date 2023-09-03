@@ -31,8 +31,8 @@ component:
   id: iostream_usart
 - {id: iostream_usart_core}
 - {id: device_init}
-- {id: sleeptimer}
 - {id: brd4314a}
+- {id: udelay}
 define:
 - {name: DEBUG_EFM}
 ui_hints: {}

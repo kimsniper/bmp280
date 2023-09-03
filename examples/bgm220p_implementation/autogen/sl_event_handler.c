@@ -9,7 +9,6 @@
 #include "sl_device_init_clocks.h"
 #include "sl_device_init_emu.h"
 #include "sl_board_control.h"
-#include "sl_sleeptimer.h"
 #include "app_log.h"
 #include "sl_debug_swo.h"
 #include "sl_iostream_stdlib_config.h"
@@ -39,7 +38,6 @@ void sl_driver_init(void)
 void sl_service_init(void)
 {
   sl_board_configure_vcom();
-  sl_sleeptimer_init();
   sl_iostream_stdlib_disable_buffering();
   sl_iostream_init_instances();
 }

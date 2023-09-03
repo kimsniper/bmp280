@@ -96,11 +96,6 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_assert.h</locationURI>
 		</link>
 		<link>
-			<name>gecko_sdk_4.3.1/platform/emlib/inc/em_burtc.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_burtc.h</locationURI>
-		</link>
-		<link>
 			<name>gecko_sdk_4.3.1/platform/emlib/inc/em_bus.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_bus.h</locationURI>
@@ -171,11 +166,6 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_ramfunc.h</locationURI>
 		</link>
 		<link>
-			<name>gecko_sdk_4.3.1/platform/emlib/inc/em_rtcc.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_rtcc.h</locationURI>
-		</link>
-		<link>
 			<name>gecko_sdk_4.3.1/platform/emlib/inc/em_syscfg.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_syscfg.h</locationURI>
@@ -191,11 +181,6 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_system_generic.h</locationURI>
 		</link>
 		<link>
-			<name>gecko_sdk_4.3.1/platform/emlib/inc/em_timer.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_timer.h</locationURI>
-		</link>
-		<link>
 			<name>gecko_sdk_4.3.1/platform/emlib/inc/em_usart.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_usart.h</locationURI>
@@ -209,11 +194,6 @@
 			<name>gecko_sdk_4.3.1/platform/emlib/inc/sli_em_cmu.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/sli_em_cmu.h</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.3.1/platform/emlib/src/em_burtc.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_burtc.c</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.3.1/platform/emlib/src/em_cmu.c</name>
@@ -251,19 +231,9 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_msc.c</locationURI>
 		</link>
 		<link>
-			<name>gecko_sdk_4.3.1/platform/emlib/src/em_rtcc.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_rtcc.c</locationURI>
-		</link>
-		<link>
 			<name>gecko_sdk_4.3.1/platform/emlib/src/em_system.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_system.c</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.3.1/platform/emlib/src/em_timer.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_timer.c</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.3.1/platform/emlib/src/em_usart.c</name>
@@ -476,46 +446,6 @@
 			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream_usart.c</locationURI>
 		</link>
 		<link>
-			<name>gecko_sdk_4.3.1/platform/service/sleeptimer/inc/sl_sleeptimer.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sleeptimer/inc/sl_sleeptimer.h</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.3.1/platform/service/sleeptimer/inc/sli_sleeptimer.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sleeptimer/inc/sli_sleeptimer.h</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.3.1/platform/service/sleeptimer/src/sl_sleeptimer.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sleeptimer/src/sl_sleeptimer.c</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.3.1/platform/service/sleeptimer/src/sl_sleeptimer_hal_burtc.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sleeptimer/src/sl_sleeptimer_hal_burtc.c</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.3.1/platform/service/sleeptimer/src/sl_sleeptimer_hal_prortc.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sleeptimer/src/sl_sleeptimer_hal_prortc.c</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.3.1/platform/service/sleeptimer/src/sl_sleeptimer_hal_rtcc.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sleeptimer/src/sl_sleeptimer_hal_rtcc.c</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.3.1/platform/service/sleeptimer/src/sl_sleeptimer_hal_timer.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sleeptimer/src/sl_sleeptimer_hal_timer.c</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.3.1/platform/service/sleeptimer/src/sli_sleeptimer_hal.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sleeptimer/src/sli_sleeptimer_hal.h</locationURI>
-		</link>
-		<link>
 			<name>gecko_sdk_4.3.1/platform/service/system/inc/sl_system_init.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/system/inc/sl_system_init.h</locationURI>
@@ -534,6 +464,21 @@
 			<name>gecko_sdk_4.3.1/platform/service/system/src/sl_system_process_action.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/system/src/sl_system_process_action.c</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.3.1/platform/service/udelay/inc/sl_udelay.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/udelay/inc/sl_udelay.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.3.1/platform/service/udelay/src/sl_udelay.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/udelay/src/sl_udelay.c</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.3.1/platform/service/udelay/src/sl_udelay_armv6m_gcc.S</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/udelay/src/sl_udelay_armv6m_gcc.S</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.3.1/platform/Device/SiliconLabs/BGM22/Include/bgm220pc22hna.h</name>
