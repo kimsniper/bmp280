@@ -33,10 +33,9 @@
 
 //Hardware Specific Components
 #include <stdio.h>
-#include "em_gpio.h"
 #include "em_i2c.h"
 #include "em_cmu.h"
-#include "sl_sleeptimer.h"
+#include "sl_udelay.h"
 
 //I2C User Defines
 #define I2CSPM_TRANSFER_TIMEOUT   300000
@@ -155,6 +154,6 @@ int16_t bmp280_i2c_hal_write(uint8_t address, uint8_t *data, uint16_t count)
 
 void bmp280_i2c_hal_ms_delay(uint32_t ms) {
 
-  sl_sleeptimer_delay_millisecond(ms);
+  sl_udelay_wait(ms * 1000);
     
 }
