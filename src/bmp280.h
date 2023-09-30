@@ -29,14 +29,23 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef MAIN_BMP280_I2C
-#define MAIN_BMP280_I2C
+#ifndef MAIN_BMP280
+#define MAIN_BMP280
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "bmp280_i2c_hal.h" 
+/*  I2C is selected by default 
+ *  Uncomment macro to enable SPI communication type
+ */
+//#define COMM_SPI
+
+#ifdef  COMM_SPI
+    #include "bmp280_spi_hal.h"
+#else
+    #include "bmp280_i2c_hal.h"
+#endif 
 
 typedef struct{
     uint16_t dig_t1;
@@ -131,77 +140,82 @@ typedef struct{
 #define RESET_VAL                       0xB6
 
 /**
+ * @brief Initialize BMP280
+ */
+int16_t bmp280_init(void);
+
+/**
  * @brief Read BMP280 calibration data
  */
-int16_t bmp280_i2c_read_calib(bmp280_calib_t *clb);
+int16_t bmp280_read_calib(bmp280_calib_t *clb);
 
 /**
  * @brief Setting BMP280 calibration data
  */
-int16_t bmp280_i2c_set_calib();
+int16_t bmp280_set_calib();
 
 /**
  * @brief Read BMP280 configuration setting
  */
-int16_t bmp280_i2c_read_config(uint8_t *cfg);
+int16_t bmp280_read_config(uint8_t *cfg);
 
 /**
  * @brief Set BMP280 filter setting
  */
-int16_t bmp280_i2c_write_config_filter(bmp280_filter_t fltr);
+int16_t bmp280_write_config_filter(bmp280_filter_t fltr);
 
 /**
  * @brief Set BMP280 standby time setting
  */
-int16_t bmp280_i2c_write_config_standby_time(bmp280_sb_time_t t_sb);
+int16_t bmp280_write_config_standby_time(bmp280_sb_time_t t_sb);
 
 /**
  * @brief Read BMP280 ctrl_meas register
  */
-int16_t bmp280_i2c_read_ctrl_meas(uint8_t *cfg);
+int16_t bmp280_read_ctrl_meas(uint8_t *cfg);
 
 /**
  * @brief Set BMP280 power mode setting
  */
-int16_t bmp280_i2c_write_power_mode(bmp280_pwr_mode_t pmode);
+int16_t bmp280_write_power_mode(bmp280_pwr_mode_t pmode);
 
 /**
  * @brief Set BMP280 oversampling setting for temp/presusure
  */
-int16_t bmp280_i2c_write_osrs(bmp280_ctrl_meas_t cfg);
+int16_t bmp280_write_osrs(bmp280_ctrl_meas_t cfg);
 
 /**
  * @brief Read BMP280 status (measuring/updating)
  */
-int16_t bmp280_i2c_read_status(bmp280_status_t *sts);
+int16_t bmp280_read_status(bmp280_status_t *sts);
 
 /**
  * @brief Perform BMP280 device reset
  */
-int16_t bmp280_i2c_reset();
+int16_t bmp280_reset();
 
 /**
  * @brief Read BMP280 raw pressure data
  */
-int16_t bmp280_i2c_read_pressure_r(int32_t *dt);
+int16_t bmp280_read_pressure_r(int32_t *dt);
 
 /**
  * @brief Read BMP280 raw temperature data
  */
-int16_t bmp280_i2c_read_temperature_r(int32_t *dt);
+int16_t bmp280_read_temperature_r(int32_t *dt);
 
 /**
  * @brief Read BMP280 pressure and temperature data
  */
-int16_t bmp280_i2c_read_data(bmp280_data_t *dt);
+int16_t bmp280_read_data(bmp280_data_t *dt);
 
 /**
  * @brief Read BMP280 part number
  */
-int16_t bmp280_i2c_read_part_number(uint8_t *dt);
+int16_t bmp280_read_part_number(uint8_t *dt);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* MAIN_BMP280_I2C */
+#endif /* MAIN_BMP280 */

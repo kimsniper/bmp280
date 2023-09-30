@@ -29,44 +29,40 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "bmp280_i2c_hal.h" 
+#ifndef MAIN_BMP280_I2C_HAL
+#define MAIN_BMP280_I2C_HAL
 
-//Hardware Specific Components
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-//I2C User Defines
+#include "stdint.h"
 
-int16_t bmp280_i2c_hal_init()
-{
-    int16_t err = BMP280_OK;
+#define BMP280_ERR     -1
+#define BMP280_OK      0x00
 
-    //User implementation here
+/**
+ * @brief I2C init to be implemented by user based on hardware platform
+ */
+int16_t bmp280_i2c_hal_init();
 
+/**
+ * @brief I2C read to be implemented by user based on hardware platform
+ */
+int16_t bmp280_i2c_hal_read(uint8_t address, uint8_t reg, uint8_t *data, uint16_t count);
 
-    return err == BMP280_OK ? BMP280_OK :  BMP280_ERR;
+/**
+ * @brief I2C write to be implemented by user based on hardware platform
+ */
+int16_t bmp280_i2c_hal_write(uint8_t address, uint8_t *data, uint16_t count);
+
+/**
+ * @brief Milliseconds delay to be implemented by user based on hardware platform
+ */
+void bmp280_i2c_hal_ms_delay(uint32_t ms);
+
+#ifdef __cplusplus
 }
+#endif
 
-int16_t bmp280_i2c_hal_read(uint8_t address, uint8_t *reg, uint8_t *data, uint16_t count)
-{
-    int16_t err = BMP280_OK;
-
-    //User implementation here
-
-
-    return err == BMP280_OK ? BMP280_OK :  BMP280_ERR;
-}
-
-int16_t bmp280_i2c_hal_write(uint8_t address, uint8_t *data, uint16_t count)
-{
-    int16_t err = BMP280_OK;
-
-    //User implementation here
-
-
-    return err == BMP280_OK ? BMP280_OK :  BMP280_ERR;
-}
-
-void bmp280_i2c_hal_ms_delay(uint32_t ms) {
-
-    //User implementation here
-    
-}
+#endif /* MAIN_BMP280_I2C_HAL */
