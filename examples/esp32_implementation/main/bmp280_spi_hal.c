@@ -116,7 +116,7 @@ int16_t bmp280_spi_hal_init()
 
 	if(ret != ESP_OK)
     {
-		err = BMP280_OK;
+		err = BMP280_ERR;
 	}
 
     return err;
